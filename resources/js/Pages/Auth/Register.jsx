@@ -10,6 +10,14 @@ export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
+        phone: '',
+        occupation: '',//if unemployed then no option
+        position: '',//if employed
+        organisation: '',//if employed
+        businessName: '',//if self
+        businessType: '',//if self
+        country: '',
+        district: '',
         password: '',
         password_confirmation: '',
     });
