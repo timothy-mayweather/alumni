@@ -1,125 +1,50 @@
-import { useEffect } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import React from 'react';
+import { Head, Link } from '@inertiajs/react';
+import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
+import Step1 from "@/Pages/Auth/RegisterSteps/Step1.jsx";
+import Step2 from "@/Pages/Auth/RegisterSteps/Step2.jsx";
 
-export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        phone: '',
-        occupation: '',//if unemployed then no option
-        position: '',//if employed
-        organisation: '',//if employed
-        businessName: '',//if self
-        businessType: '',//if self
-        country: '',
-        district: '',
-        password: '',
-        password_confirmation: '',
-    });
-
-    useEffect(() => {
-        return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
-
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('register'));
-    };
-
+export default function Register({step, validated}) {
     return (
-        <GuestLayout>
+        <>
+        <nav className="bg-white border-b border-gray-100">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between h-10">
+                    <div className="flex">
+                        <div className="shrink-0 flex items-center">
+                            <Link href="/">
+                                <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                            </Link>
+                            <span className="sm:hidden">
+                                UBTEB
+                            </span>
+                            <span className="hidden lg:block md:block">
+                                UGANDA BUSINESS AND TECHNICAL EXAMINATIONS BOARD
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="flex">
+                        <div className="shrink-0 sm:flex sm:items-center">
+                            <div className="relative">
+                                <a href="https://facebook.com" target="_blank"><i className="fa-brands fa-facebook text-blue-700 text-xl mr-2"></i></a>
+                                <a href="https://twitter.com" target="_blank"><i className="fa-brands fa-square-twitter text-blue-700 text-xl  mr-2"></i></a>
+                                <a href="https://instagram.com" target="_blank"><i className="fa-brands fa-instagram text-orange-500 text-xl mr-2"></i></a>
+                                <a href="https://linkedin.com" target="_blank"><i className="fa-brands fa-linkedin text-blue-700 text-xl mr-2"></i></a>
+                                <a href="https://youtube.com" target="_blank"><i className="fa-brands fa-youtube text-red-600 text-xl mr-2"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div className="min-h-screen px-20 py-10 flex flex-col sm:justify-center items-center pt-6 bg-gray-100">
             <Head title="Register" />
-            <p>After registration, please wait for Admin's approval to access the system</p><br/>
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.name} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.password_confirmation} className="mt-2" />
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Already registered?
-                    </Link>
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Register
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
+            <h1 className="text-center yellow font-bold text-xl mb-2"> ---- Get Started - Let us Keep in Touch! ----</h1>
+            <p className="text-3xl text-center font-bold">Are you a former student of UBTEB and or its previous Institutions? Register Below.</p><br/>
+            {step===1?<Step1 />:<Step2 validated={validated}/>}
+        </div>
+            </>
     );
 }
