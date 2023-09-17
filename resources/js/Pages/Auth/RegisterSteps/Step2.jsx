@@ -144,7 +144,7 @@ export default function Step2() {
 
                             <TextInput
                                 name="lastName"
-                                value={data.middleName}
+                                value={data.lastName}
                                 placeholder="Last"
                                 className="mt-1"
                                 isFocused={true}
