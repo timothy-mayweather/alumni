@@ -59,10 +59,10 @@ function UserView({fetchedUsers}){
                     <td>{us.firstName+' '+(us.middleName??'')+' '+us.lastName}</td>
                     <td>{us.email}</td>
                     <td>{us.role}</td>
-                    <td>{us.deleted_at!==null?"Deactivated":us.role==="provisional"?"Not Approved":"Active"}</td>
+                    <td>{us.deleted_at!==null?"Deactivated":"Active"}</td>
                     <td>{us.email_verified_at===null?"No":"Yes"}</td>
                     <td><Link href={authUser.id===us.id?"/profile":"/profile/"+us.id}><u>profile</u></Link></td>
-                    <td><Link href={authUser.id===us.id?"/academic":"/academic/"+us.id}><u>academic</u></Link></td>
+                    <td><Link href={authUser.id===us.id?"/academic":"/academic/"+us.id} onFinish={()=>{if(window.location.pathname==="/users") $.notify("Academic info not found!")}}><u>academic</u></Link></td>
                     <th>
                         <PrimaryButton onClick={()=>{show(us)}}>
                             EDIT

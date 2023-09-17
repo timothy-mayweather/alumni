@@ -52,7 +52,6 @@ export default function UpdateAcademicInformation({academicInfo, chosenUser, cla
                         name="institutions"
                         value={data.institutions}
                         className="mt-1 w-full"
-                        isFocused={true}
                         onChange={(e) => setData(e.target.name, e.target.value)}
                         required
                     />
@@ -148,7 +147,6 @@ export default function UpdateAcademicInformation({academicInfo, chosenUser, cla
                             value={data.firstName}
                             placeholder="First"
                             className="mt-1"
-                            isFocused={true}
                             onChange={(e) => setData(e.target.name, e.target.value)}
                         />
 
@@ -158,17 +156,15 @@ export default function UpdateAcademicInformation({academicInfo, chosenUser, cla
                             value={data.middleName}
                             placeholder="Middle"
                             className="mt-1"
-                            isFocused={true}
                             onChange={(e) => setData(e.target.name, e.target.value)}
                         />
 
                         <TextInput
                             disabled={!isCurrentUser}
                             name="lastName"
-                            value={data.middleName}
+                            value={data.lastName}
                             placeholder="Last"
                             className="mt-1"
-                            isFocused={true}
                             onChange={(e) => setData(e.target.name, e.target.value)}
                         />
                     </div>
@@ -186,7 +182,6 @@ export default function UpdateAcademicInformation({academicInfo, chosenUser, cla
                             name="role"
                             value={data.role}
                             className="mt-1"
-                            isFocused={true}
                             onChange={(e) => setData(e.target.name, e.target.value)}
                         />
 
@@ -195,7 +190,6 @@ export default function UpdateAcademicInformation({academicInfo, chosenUser, cla
                             name="organisation"
                             value={data.organisation}
                             className="mt-1"
-                            isFocused={true}
                             onChange={(e) => setData(e.target.name, e.target.value)}
                         />
                     </div>
