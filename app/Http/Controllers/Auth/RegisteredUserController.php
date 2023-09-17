@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
 
 		$validated['password'] = Hash::make($request->password);
 		$user = User::create($validated);
-//			event(new Registered($user));
+        event(new Registered($user));
 		$request->session()->put('userEmail', $validated['email']);
 		$request->session()->put('userPassword', $validated['password']);
 		return redirect('/register/step2');
