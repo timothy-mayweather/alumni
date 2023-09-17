@@ -37,13 +37,11 @@ function UserEditModal({currentUser, showModal, setShowModal, setRespUser}) {
         <div>
             <Modal onClose={close} show={showModal}>
                 <div className="px-6 py-6">
-                    <div className="mb-4"><span className="mr-2">Name: </span><span>{currentUser.name}</span></div>
+                    <div className="mb-4"><span className="mr-2">Name: </span><span>{currentUser.firstName+' '+(currentUser.middleName??'')+' '+currentUser.lastName}</span></div>
                     <div className="mb-4"><span className="mr-2">Email: </span><span>{currentUser.email}</span></div>
                     <div className="mb-4"><span className="mr-2">Role: </span><span className="mr-4">{currentUser.role}</span><label className="mr-4">Change Role:</label><select defaultValue={currentUser.role} onChange={(ev)=>{newRole=ev.target.value}}>
                         <option value="admin">Admin</option>
-                        <option value="supervisor">Supervisor</option>
-                        <option value="employee">Employee</option>
-                        <option value="provisional">Provisional</option>
+                        <option value="alumni">Alumni</option>
                     </select></div>
                     <div className="mb-4"><span className="mr-2">Status: </span><span className="mr-8">{currentUser.deleted_at!==null?"Deactivated":currentUser.role==="provisional"?"Not Approved":"Active"}</span>
                         <input type="checkbox" defaultChecked={false} onChange={(ev)=>{checked=ev.target.checked}}/><label className="ml-3">{currentUser.deleted_at!==null?"Activate":"Deactivate"}</label>

@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -21,10 +20,20 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'role',
-        'password',
+        'firstName',
+		'middleName', //nullable
+		'lastName',
+		'ubtebNo',
+		'email',
+		'phone',
+		'occupation',
+		'position',//if employed
+		'organisation',//if employed
+		'businessName',//if self
+		'businessType',//if self
+		'country',
+		'district',
+		'password',
     ];
 
     /**
@@ -47,20 +56,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
+	public function academicInfo(): HasOne
+	{
+		return $this->hasOne(AcademicInfo::class);
+	}
 
-    public function reports(): HasMany
-    {
-        return $this->hasMany(Report::class);
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->role==="admin";
-    }
-
-    public function reportViews(): HasMany
-    {
-        return $this->hasMany(ReportViewer::class);
-    }
-
+	public function isAdmin(): bool
+	{
+		return $this->role==='admin';
+	}
 }

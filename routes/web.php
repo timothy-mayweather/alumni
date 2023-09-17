@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcademicInfoController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
@@ -40,20 +41,26 @@ Route::get('/command', static function (Request $request){
     return "<form method='get' action='/command'>command: <input type='text' name='command'/><input type='submit'></form><div>$output</div>";
 });
 
+Route::get('/register/step2', [AcademicInfoController::class, 'create'])->name('register.step2');
+Route::resource('academic', AcademicInfoController::class)->only(['store']);
 
 Route::middleware('auth')->group(function () {
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+	Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 	Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-	Route::get('/dashboard', function () {
-		return Inertia::render('Dashboard', ['init'=>json_encode([]), 'people'=>json_encode([])]);
-	})->middleware(['auth', 'verified'])->name('dashboard');
-
-	Route::resource('upload', App\Http\Controllers\UploadController::class)->only(['index','store'])->middleware(['auth','verified']);
-	Route::get('/reports/shared', [ReportController::class, 'createShared'])->name('reports.shared');
-	Route::resource('reports', ReportController::class)->middleware(['auth','verified']);
-	Route::get('templates', [ReportController::class, 'templates']);
-	Route::get('/template/{report}', [ReportController::class, 'template']);
+	Route::get('/academic', [AcademicInfoController::class, 'edit'])->name('academic.edit');
+	Route::get('/academic/{user}', [AcademicInfoController::class, 'show'])->name('academic.show');
+	Route::patch('/academic', [AcademicInfoController::class, 'update'])->name('academic.update');
+//	Route::get('/dashboard', function () {
+//		return Inertia::render('Dashboard', ['init'=>json_encode([]), 'people'=>json_encode([])]);
+//	})->middleware(['auth', 'verified'])->name('dashboard');
+//
+//	Route::resource('upload', App\Http\Controllers\UploadController::class)->only(['index','store'])->middleware(['auth','verified']);
+//	Route::get('/reports/shared', [ReportController::class, 'createShared'])->name('reports.shared');
+//	Route::resource('reports', ReportController::class)->middleware(['auth','verified']);
+//	Route::get('templates', [ReportController::class, 'templates']);
+//	Route::get('/template/{report}', [ReportController::class, 'template']);
 	Route::resource('users', UserController::class)->only(['index','create', 'update'])->withTrashed(['update']);
 });
 

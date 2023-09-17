@@ -7,14 +7,13 @@ import { Link, useForm } from '@inertiajs/react';
 
 export default function Step1() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        step: 1,
         firstName: '',
         middleName: '',
         lastName: '',
         email: '',
         ubtebNo: '',
         phone: '',
-        occupation: 'unEmployed',//if unemployed then no option
+        occupation: 'employed',//if unemployed then no option
         position: '',//if employed
         organisation: '',//if employed
         businessName: '',//if self
@@ -103,7 +102,6 @@ export default function Step1() {
                                 type="tel"
                                 name="phone"
                                 placeholder="e.g 256700000000"
-                                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                                 value={data.phone}
                                 className="mt-1"
                                 onChange={(e) => setData(e.target.name, e.target.value)}

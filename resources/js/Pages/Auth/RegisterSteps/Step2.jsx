@@ -5,10 +5,8 @@ import PrimaryButton from '@/Components/PrimaryButton.jsx';
 import TextInput from '@/Components/TextInput.jsx';
 import { useForm } from '@inertiajs/react';
 
-export default function Step2({validated}) {
+export default function Step2() {
     const { data, setData, post, processing, errors} = useForm({
-        ...validated,
-        step:2,
         institutions: '',
         faculty: '',
         course: '',
@@ -27,7 +25,7 @@ export default function Step2({validated}) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'));
+        post(route('academic.store'));
     };
 
     return (
@@ -196,7 +194,6 @@ export default function Step2({validated}) {
                                 className="mt-1"
                                 autoComplete="email"
                                 onChange={(e) => setData(e.target.name, e.target.value)}
-                                required
                             />
 
                             <TextInput
@@ -208,7 +205,6 @@ export default function Step2({validated}) {
                                 value={data.phone}
                                 className="mt-1"
                                 onChange={(e) => setData(e.target.name, e.target.value)}
-                                required
                             />
                         </div>
                     </div>

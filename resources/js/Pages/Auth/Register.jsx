@@ -4,7 +4,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import Step1 from "@/Pages/Auth/RegisterSteps/Step1.jsx";
 import Step2 from "@/Pages/Auth/RegisterSteps/Step2.jsx";
 
-export default function Register({step, validated}) {
+export default function Register({step}) {
     return (
         <>
         <nav className="bg-white border-b border-gray-100">
@@ -43,8 +43,8 @@ export default function Register({step, validated}) {
             <Head title="Register" />
             <h1 className="text-center yellow font-bold text-xl mb-2"> ---- Get Started - Let us Keep in Touch! ----</h1>
             <p className="text-3xl text-center font-bold">Are you a former student of UBTEB and or its previous Institutions? Register Below.</p><br/>
-            {step===1?<Step1 />:<Step2 validated={validated}/>}
+            {step===1?<Step1 />:<Step2 />}
         </div>
-            </>
+        </>
     );
 }

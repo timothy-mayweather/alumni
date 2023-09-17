@@ -27,8 +27,13 @@ export default function Authenticated({ user, header, children }) {
                             </div>}
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink hrefRoute='reports.index' preserveState>
-                                    Records
+                                <NavLink hrefRoute='profile.edit' preserveState>
+                                    Profile
+                                </NavLink>
+                            </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink hrefRoute='academic.edit' preserveState>
+                                    Academic Info
                                 </NavLink>
                             </div>
                         </div>
@@ -44,7 +49,7 @@ export default function Authenticated({ user, header, children }) {
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {user.name}
+                                                {user.email}
 
                                                 <svg
                                                     className="ml-2 -mr-0.5 h-4 w-4"
@@ -63,7 +68,7 @@ export default function Authenticated({ user, header, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        {/*<Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>*/}
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>
@@ -106,8 +111,11 @@ export default function Authenticated({ user, header, children }) {
                         <ResponsiveNavLink href={route('users.index')} active={route().current('users.index')}>
                             Users
                         </ResponsiveNavLink>}
-                        <ResponsiveNavLink href={route('reports.index')} active={route().current('reports.index')}>
-                            Records
+                        <ResponsiveNavLink href={route('profile.edit')} active={route().current('profile.edit')}>
+                            Profile
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('academic.edit')} active={route().current('academic.edit')}>
+                            Academic Info
                         </ResponsiveNavLink>
                     </div>
 
