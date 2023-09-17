@@ -44,7 +44,7 @@ Route::get('/command', static function (Request $request){
 Route::get('/register/step2', [AcademicInfoController::class, 'create'])->name('register.step2');
 Route::resource('academic', AcademicInfoController::class)->only(['store']);
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 	Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
