@@ -10,6 +10,7 @@ function UserView({fetchedUsers}){
     const [currentUser, setCurrentUser] = useState(fetchedUsers[0])
     const [respUser, setRespUser] = useState(null)
     const authUser = usePage().props.auth.user;
+    const emailArray = [];
 
     useEffect(() => {
         if(respUser!==null){
@@ -38,6 +39,15 @@ function UserView({fetchedUsers}){
         setShowModal(true)
     }
 
+    function email(){
+        window.location.href = "mailto:"+emailArray.toString()
+    }
+
+    function copyEmail(){
+        navigator.clipboard.writeText(emailArray.toString())
+        $.notify("All emails copied to the clipboard", "info")
+    }
+
     return (
         <div>
             <UserEditModal showModal={showModal} setShowModal={setShowModal} currentUser={currentUser} setRespUser={setRespUser}/>
@@ -45,7 +55,7 @@ function UserView({fetchedUsers}){
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Email</th>
+                    <th>Email<i className="fa fa-envelope text-blue-700 ml-2" onClick={email}></i><i className="fa fa-copy text-blue-700 ml-2" onClick={copyEmail}></i></th>
                     <th>Role</th>
                     <th>Status</th>
                     <th>Email Verified</th>
@@ -55,7 +65,9 @@ function UserView({fetchedUsers}){
                 </tr>
                 </thead>
                 <tbody>
-                {Object.values(users).map((us)=><tr key={us.id}>
+                {Object.values(users).map((us)=>{
+                    emailArray.push(us.email)
+                    return (<tr key={us.id}>
                     <td>{us.firstName+' '+(us.middleName??'')+' '+us.lastName}</td>
                     <td>{us.email}</td>
                     <td>{us.role}</td>
@@ -68,7 +80,7 @@ function UserView({fetchedUsers}){
                             EDIT
                         </PrimaryButton>
                     </th>
-                </tr>)}
+                </tr>)})}
                 </tbody>
             </table>
         </div>
